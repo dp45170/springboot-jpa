@@ -18,5 +18,9 @@ public class CustomerService {
 		//customers and apply business logic
 		return customerRepository.findAll();
 	}
+	
+	public List<Customers> withAddress() {
+		return customerRepository.customersWithAddress();
+	}
 
 }

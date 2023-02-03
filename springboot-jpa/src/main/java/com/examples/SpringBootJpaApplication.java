@@ -22,8 +22,12 @@ public class SpringBootJpaApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		List<Customers> customers = customerService.findAll();
-		System.out.println(customers.size());
+//		List<Customers> customers = customerService.findAll();
+//		System.out.println(customers.size());
+//		customers.forEach(System.out::println);
+		List<Customers> customers = customerService.withAddress();
+		customers.forEach(System.out::println);
+		
 		
 	}
 

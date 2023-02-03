@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -14,7 +15,8 @@ public class Customers {
 	private Integer customerId; 
 	private String customerName;
 	private String customerPhone;
-	
+	@OneToOne(mappedBy = "customers")
+	private Address address;
 	public Integer getCustomerId() {
 		return customerId;
 	}
@@ -33,11 +35,21 @@ public class Customers {
 	public void setCustomerPhone(String customerPhone) {
 		this.customerPhone = customerPhone;
 	}
+	
+	public Address getAddress() {
+		return address;
+	}
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 	@Override
 	public String toString() {
 		return "Customers [customerId=" + customerId + ", customerName=" + customerName + ", customerPhone="
-				+ customerPhone + "]";
+				+ customerPhone + ", address=" + address + "]";
 	}
+	
+	
+	
 	
 	
 
