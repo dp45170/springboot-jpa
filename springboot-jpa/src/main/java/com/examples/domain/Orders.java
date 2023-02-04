@@ -1,13 +1,17 @@
 package com.examples.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -20,6 +24,8 @@ public class Orders {
 	@ManyToOne
 	@JoinColumn(name="customerId",referencedColumnName = "customerId")
 	private Customers customers;
+	@OneToMany(mappedBy = "orders", fetch = FetchType.EAGER)
+	private List<OrderDetails> orderDetails = new ArrayList<>();
 	public Integer getOrderId() {
 		return orderId;
 	}
@@ -38,11 +44,17 @@ public class Orders {
 	public void setCustomers(Customers customers) {
 		this.customers = customers;
 	}
+	public List<OrderDetails> getOrderDetails() {
+		return orderDetails;
+	}
+	public void setOrderDetails(List<OrderDetails> orderDetails) {
+		this.orderDetails = orderDetails;
+	}
 	@Override
 	public String toString() {
-		return "Orders [orderId=" + orderId + ", orderDate=" + orderDate + ", customers=" + customers + "]";
+		return "Orders [orderId=" + orderId + ", orderDate=" + orderDate + ", customers=" + customers
+				+ ", orderDetails=" + orderDetails + "]";
 	}
-	
 	
 
 }
