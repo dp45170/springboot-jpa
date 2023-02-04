@@ -1,7 +1,5 @@
 package com.examples.domain;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,18 +8,21 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "order_details")
-public class OrderDetails implements Serializable{
+public class OrderDetails {
 
-	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer orderDetailsId;
 	private Integer quantity;
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "orderId", referencedColumnName = "orderId")
 	private Orders orders;
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "productId", referencedColumnName = "productId")
 	private Products products;

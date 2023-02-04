@@ -1,6 +1,5 @@
 package com.examples.domain;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,16 +11,18 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "products")
-public class Products implements Serializable{
+public class Products {
 
-	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer productId;
 	private String productName;
 	private Float productPrice;
+	@JsonManagedReference
 	@OneToMany(mappedBy = "products", fetch = FetchType.LAZY)
 	private List<OrderDetails> orderDetails = new ArrayList<>();
 	public Integer getProductId() {
