@@ -6,8 +6,6 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,14 +20,15 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Orders {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer orderId;
 	private Date orderDate;
-	@JsonBackReference
+	
+	@JsonBackReference(value ="orders")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="customerId",referencedColumnName = "customerId")
 	private Customers customers;
-	@JsonManagedReference
+	
+	@JsonManagedReference(value ="o-orders")
 	@OneToMany(mappedBy = "orders", fetch = FetchType.LAZY)
 	private List<OrderDetails> orderDetails = new ArrayList<>();
 	public Integer getOrderId() {

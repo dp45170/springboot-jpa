@@ -1,8 +1,6 @@
 package com.examples.domain;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -15,14 +13,13 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 public class OrderDetails {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer orderDetailsId;
 	private Integer quantity;
-	@JsonBackReference
+	@JsonBackReference(value ="o-orders")
 	@ManyToOne
 	@JoinColumn(name = "orderId", referencedColumnName = "orderId")
 	private Orders orders;
-	@JsonBackReference
+	@JsonBackReference(value="products")
 	@ManyToOne
 	@JoinColumn(name = "productId", referencedColumnName = "productId")
 	private Products products;

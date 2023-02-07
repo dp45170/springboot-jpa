@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -19,16 +17,19 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Customers {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer customerId; 
 	private String customerName;
 	private String customerPhone;
-	@JsonManagedReference
+	
+	@JsonManagedReference(value="address")
 	@OneToOne(mappedBy = "customers", fetch = FetchType.LAZY)
 	private Address address;
-	@JsonManagedReference
+	
+	@JsonManagedReference(value ="orders")
 	@OneToMany(mappedBy = "customers", fetch = FetchType.LAZY)
 	private List<Orders> orders = new ArrayList<>();
+	
+	
 	public Integer getCustomerId() {
 		return customerId;
 	}

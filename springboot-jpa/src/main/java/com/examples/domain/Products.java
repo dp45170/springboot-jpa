@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -18,11 +16,10 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Products {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer productId;
 	private String productName;
 	private Float productPrice;
-	@JsonManagedReference
+	@JsonManagedReference(value="products")
 	@OneToMany(mappedBy = "products", fetch = FetchType.LAZY)
 	private List<OrderDetails> orderDetails = new ArrayList<>();
 	public Integer getProductId() {

@@ -3,8 +3,6 @@ package com.examples.domain;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -17,12 +15,11 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 public class Address {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer customerId;
 	private String street;
 	private String city;
 	private String zipcode;
-	@JsonBackReference
+	@JsonBackReference(value="address")
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name="customerId", referencedColumnName = "customerId")
 	private Customers customers;

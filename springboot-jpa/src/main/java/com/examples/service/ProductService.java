@@ -27,5 +27,9 @@ public class ProductService {
 			return null;
 		}
 	}
+	
+	public Products storeProducts(Products products) {
+		return productRepository.saveAndFlush(products);
+	}
 
 }
