@@ -39,5 +39,17 @@ public class CustomerService {
 	public Customers saveCusotmers(Customers customers) {
 		return customerRepository.saveAndFlush(customers);
 	}
+	
+	public Customers updateCustomer(Customers customers) {
+		Customers c= customerRepository.findById(customers.getCustomerId()).orElse(null);
+		c.setCustomerName(customers.getCustomerName());
+		c.setCustomerPhone(customers.getCustomerPhone());
+		customerRepository.saveAndFlush(c);
+		return c;
+	}
+	
+	public void deleteCustomer(Customers customers) {
+		customerRepository.delete(customers);
+	}
 
 }
